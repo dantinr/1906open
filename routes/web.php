@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    echo "open.1906.com";echo "<br>";
+    echo date("Y-m-d H:i:s");echo "<br>";
 });
+
+
+
+

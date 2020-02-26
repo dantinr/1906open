@@ -21,3 +21,6 @@ Route::get('/', function () {
 
 Route::get('/user/reg','User\IndexController@reg');      //用户注册
 Route::post('/user/reg','User\IndexController@regDo');     //用户注册
+
+Route::get('/user/login','User\IndexController@login');     //用户登录
+Route::post('/user/login','User\IndexController@loginDo');     //用户登录

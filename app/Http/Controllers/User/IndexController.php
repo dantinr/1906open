@@ -44,4 +44,42 @@ class IndexController extends Controller
         }
 
     }
+
+
+    /**
+     * 登录
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function login()
+    {
+        return view('user.login');
+    }
+
+    public function loginDo(Request $request)
+    {
+        //echo "<pre>";print_r($request->input());echo "</pre>";echo '<hr>';
+        $name = $request->input('u_name');      // 可以使 user_name  Email  Mobile
+        $pass = $request->input('pass');
+
+        $u = UserModel::where(['user_name'=>$name])
+            ->orWhere(['email'=>$name])
+            ->orWhere(['mobile'=>$name])
+            ->first();
+
+        if($u == NULL){
+            echo "用户不存在";
+            die;
+        }
+
+        //验证密码
+        if( !password_verify($pass,$u->pass) )
+        {
+            echo "密码不正确";
+            die;
+        }
+
+        // 登录成功
+        echo "登录成功,正在跳转至个人中心";
+        
+    }
 }

@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 
 
-
+Route::get('/user/reg','User\IndexController@reg');      //用户注册
+Route::post('/user/reg','User\IndexController@regDo');     //用户注册

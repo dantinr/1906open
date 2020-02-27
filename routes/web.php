@@ -25,3 +25,5 @@ Route::post('/user/reg','User\IndexController@regDo');     //用户注册
 
 Route::get('/user/login','User\IndexController@login');     //用户登录
 Route::post('/user/login','User\IndexController@loginDo');     //用户登录
+
+Route::get('/user/center','User\IndexController@center');     //个人中心

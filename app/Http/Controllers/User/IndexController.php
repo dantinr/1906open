@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
 use App\Model\AppModel;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -112,7 +115,62 @@ class IndexController extends Controller
         }
 
         // 登录成功
+        $token = Str::random(16);       //生成token，返回给客户端
+        Cookie::queue('token',$token,60);
+
+        //将token 保存至Redis中
+        $redis_h_token = 'h:token:'.$token;     // h:token:d3GdX4WBe0BIFrv4
+
+        $login_info = [
+            'uid'           => $u->id,
+            'user_name'     => $u->user_name,
+            'login_time'    => time()
+        ];
+
+        Redis::hMset($redis_h_token,$login_info);
+        Redis::expire($redis_h_token,60*60);
+
+        header("refresh:2;url=/user/center");
         echo "登录成功,正在跳转至个人中心";
-        
+
+    }
+
+
+    /**
+     * 个人中心
+     */
+    public function center()
+    {
+
+        $token = Cookie::get('token');
+
+        if(empty($token)){
+            echo "请先登录";die;
+        }
+
+        //echo "<pre>";print_r($token);echo "</pre>";
+
+        //拿到token 拼接 redis key
+
+        $redis_h_token = 'h:token:'.$token;     // h:token:d3GdX4WBe0BIFrv4
+        //echo $key = $redis_h_token;
+
+        $login_info = Redis::hgetAll($redis_h_token);
+
+        //echo "<pre>";print_r($login_info);echo "</pre>";
+
+        //获取 用户应用信息
+        $app_info = AppModel::where(['uid'=>$login_info['uid']])->first()->toArray();
+
+        //echo "<pre>";print_r($app_info);echo "</pre>";
+
+        echo "欢迎来到个人中心：".$login_info['user_name'];echo "<br>";
+        echo "APPID: ".$app_info['app_id'];echo "<br>";
+        echo "APPSecret: ".$app_info['app_secret'];echo "<br>";
+
+
+
+
+
     }
 }

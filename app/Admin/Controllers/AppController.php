@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Model\UserModel;
+use App\Model\AppModel;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class UserController extends AdminController
+class AppController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = '用户管理';
+    protected $title = 'APP管理';
 
     /**
      * Make a grid builder.
@@ -24,16 +24,14 @@ class UserController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new UserModel());
-        $grid->model()->orderBy('id','desc');
+        $grid = new Grid(new AppModel());
 
         $grid->column('id', __('Id'));
-        $grid->column('user_name', __('用户名'));
-        $grid->column('email', __('邮箱'));
-        //$grid->column('pass', __('Pass'));
-        $grid->column('mobile', __('手机号'));
+        $grid->column('uid', __('Uid'));
+        $grid->column('app_id', __('App id'));
+        $grid->column('app_secret', __('App secret'));
         $grid->column('created_at', __('Created at'));
-        //$grid->column('updated_at', __('Updated at'));
+        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -46,13 +44,12 @@ class UserController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(UserModel::findOrFail($id));
+        $show = new Show(AppModel::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_name', __('User name'));
-        $show->field('email', __('Email'));
-        $show->field('pass', __('Pass'));
-        $show->field('mobile', __('Mobile'));
+        $show->field('uid', __('Uid'));
+        $show->field('app_id', __('App id'));
+        $show->field('app_secret', __('App secret'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -66,12 +63,11 @@ class UserController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new UserModel());
+        $form = new Form(new AppModel());
 
-        $form->text('user_name', __('User name'));
-        $form->email('email', __('Email'));
-        $form->text('pass', __('Pass'));
-        $form->mobile('mobile', __('Mobile'));
+        $form->number('uid', __('Uid'));
+        $form->text('app_id', __('App id'));
+        $form->text('app_secret', __('App secret'));
 
         return $form;
     }

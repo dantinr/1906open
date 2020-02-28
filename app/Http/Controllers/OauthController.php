@@ -35,7 +35,28 @@ class OauthController extends Controller
            ]
         ]);
 
-        $body = $response->getBody();
+        $body = $response->getBody();   // {"access_token":"088a1d504f1ccac357512b8b5c3c303dd45cf773","token_type":"bearer","scope":""}
         echo 'body:'.$body;
+
+        //取出 access_token
+        $token_info = json_decode($body,true);
+
+
+        //获取用户信息
+        $url = 'https://api.github.com/user';
+
+        $response = $client->request("GET",$url,[
+           'headers'    => [
+               'Authorization'  => "token ".$token_info['access_token']
+           ]
+        ]);
+
+        $body = $response->getBody();
+        echo '用户信息: '.$body;
+
+
+
+
+
     }
 }

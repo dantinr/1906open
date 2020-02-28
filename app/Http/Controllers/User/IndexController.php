@@ -36,6 +36,12 @@ class IndexController extends Controller
             echo "两次输入的密码不一致";die;
         }
 
+
+        //用户名 手机号 Email 是否已存在
+
+        // email格式 用户名 手机号 密码 格式验证
+
+
         $pass = password_hash($pass1,PASSWORD_BCRYPT);
 
         //入库
@@ -170,6 +176,53 @@ class IndexController extends Controller
 
 
 
+
+
+    }
+
+
+    /**
+     * 获取access_token,记录有效期
+     */
+    public function getAccessToken(Request $request)
+    {
+        $appid = $request->get('appid');
+        $appsecret = $request->get('appsecret');
+
+        if(empty($appsecret) || empty($appid))
+        {
+            echo "缺少参数";die;
+        }
+
+        //TODO 验证 appid 与 appsecret
+
+        //echo 'appid: '.$appid;echo "<br>";
+        //echo 'appsecret: '.$appsecret;echo "<br>";
+
+        // 为用户生成accessToken，供后续接口调用
+        $str = $appid . $appsecret . time() . mt_rand() . Str::random(16);
+        //echo 'str:' .$str;echo "<br>";
+        $access_token = sha1($str) . md5($str);
+        //echo 'access_token: '.$access_token;echo "<br>";
+
+        $redis_h_key = 'h:access_token:'.$access_token;     // redis hash
+        //echo 'redis_key: '.$redis_h_key;
+
+        $app_info = [
+            'appid'     => $appid,
+            'addtime'   => date('Y-m-d H:i:s')
+        ];
+
+        Redis::hMset($redis_h_key,$app_info);
+        Redis::expire($redis_h_key,7200);
+
+        $response = [
+            'errno'         => 0,
+            'access_token'  =>  $access_token,
+            'expire'        => 7200
+        ];
+
+        return $response;
 
 
     }

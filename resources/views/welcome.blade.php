@@ -88,6 +88,10 @@
                     <a href="/user/reg">注册</a>
                     <a href="/user/login">登录</a>
                 </div>
+                <hr>
+                <div class="links">
+                    <a href="https://github.com/login/oauth/authorize?client_id=53c54c6b2f5bbbc2b684&redirect_uri=http://1906open.comcto.com/github/callback">github</a>
+                </div>
             </div>
         </div>
     </body>

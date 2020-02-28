@@ -31,3 +31,8 @@ Route::get('/user/center','User\IndexController@center');     //个人中心
 
 ## 接口
 Route::get('/getAccessToken','User\IndexController@getAccessToken');    //获取accessToken
+
+
+
+##github回调
+Route::get('/github/callback','OauthController@githubCallback');

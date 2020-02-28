@@ -25,7 +25,7 @@ class OauthController extends Controller
         $response = $client->request('POST',$url,[
 
             'headers'   =>[
-              'Accept: application/json'
+              'Accept'  =>  'application/json'
             ],
 
            'form_params'    => [

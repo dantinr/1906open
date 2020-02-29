@@ -80,25 +80,12 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    1906开放平台
-                </div>
-
                 <div class="links">
-                    <a href="/user/reg">注册</a>
-                    <a href="/user/login">登录</a>
-                </div>
-                <hr>
-                <div class="links">
-                    <a href="https://github.com/login/oauth/authorize?client_id=fc8864b4aea791b9f4c7&redirect_uri=http://open.1906.com/github/callback2">
-                        <img width="50" src="images/github.jpg" alt="">
-                    </a>
-                    <a href="https://github.com/login/oauth/authorize?client_id=fc8864b4aea791b9f4c7&redirect_uri=http://open.1906.com/github/callback2">
-                        <img width="50" src="images/github.jpg" alt="">
-                    </a>
-                    <a href="https://github.com/login/oauth/authorize?client_id=fc8864b4aea791b9f4c7&redirect_uri=http://open.1906.com/github/callback2">
-                        <img width="50" src="images/github.jpg" alt="">
-                    </a>
+                    <h2>
+                        <a href="https://github.com/login/oauth/authorize?client_id=fc8864b4aea791b9f4c7&redirect_uri=http://open.1906.com/github/callback2">
+                            <img src="images/github.jpg" alt="">
+                        </a>
+                    </h2>
                 </div>
             </div>
         </div>

@@ -166,13 +166,19 @@ class IndexController extends Controller
         //echo "<pre>";print_r($login_info);echo "</pre>";
 
         //获取 用户应用信息
-        $app_info = AppModel::where(['uid'=>$login_info['uid']])->first()->toArray();
+        echo "欢迎来到个人中心：".$login_info['uid'];echo "<br>";
+        $app_info = AppModel::where(['uid'=>$login_info['uid']])->first();
+        if($app_info){
+            echo "APPID: ".$app_info->app_id;echo "<br>";
+            echo "APPSecret: ".$app_info->app_secret;echo "<br>";
+        }else{
+            echo "暂无应用信息";
+        }
 
-        //echo "<pre>";print_r($app_info);echo "</pre>";
 
-        echo "欢迎来到个人中心：".$login_info['user_name'];echo "<br>";
-        echo "APPID: ".$app_info['app_id'];echo "<br>";
-        echo "APPSecret: ".$app_info['app_secret'];echo "<br>";
+
+
+
 
 
 

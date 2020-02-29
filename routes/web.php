@@ -20,6 +20,11 @@ Route::get('/', function () {
 
 
 
+Route::get('/github','GithubController@index'); ##GITHUB登录
+Route::get('/github/callback2','GithubController@callback2'); ##用户授权回跳的页面
+
+
+
 Route::get('/user/reg','User\IndexController@reg');      //用户注册
 Route::post('/user/reg','User\IndexController@regDo');     //用户注册
 

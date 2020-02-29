@@ -53,10 +53,11 @@ class OauthController extends Controller
 
         $body = $response->getBody();
         echo '用户信息: '.$body;echo '<hr>';
-
-
         $arr = json_decode($body,true);
         echo "<pre>";print_r($arr);echo "</pre>";
+
+
+
 
 
 

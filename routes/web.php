@@ -29,8 +29,13 @@ Route::post('/user/login','User\IndexController@loginDo');     //用户登录
 Route::get('/user/center','User\IndexController@center');     //个人中心
 
 
-## 接口
+## 外部调用接口
 Route::get('/getAccessToken','User\IndexController@getAccessToken');    //获取accessToken
+
+
+//接口需要access_token验证
+Route::get('/api/test','Api\IndexController@test');
+Route::get('/api/userinfo','Api\IndexController@userInfo');
 
 
 

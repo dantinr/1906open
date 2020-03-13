@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('/github','GithubController@index'); ##GITHUB登录
 Route::get('/github/callback2','GithubController@callback2'); ##用户授权回跳的页面
+Route::get('/github/aaa','GithubController@callback2'); ##用户授权回跳的页面
 
 
 
